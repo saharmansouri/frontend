@@ -12,12 +12,13 @@ import apiRequests from "../../Servicse/Axios/configs";
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea";
 
 export default function CourseInfo() {
-  const { courseName } = useParams()
-  const [comments, setComments] = useState([])
-  const [sessions, setSessions] = useState([])
-  const [courseDetails, setCourseDetails] = useState()
-  const [createdAt, setCreatedAt] = useState('')
-  const [updatedAt, setUpdatedAt] = useState('')
+  const { courseName } = useParams();
+  const [comments, setComments] = useState([]);
+  const [sessions, setSessions] = useState([]);
+  const [courseDetails, setCourseDetails] = useState();
+  const [createdAt, setCreatedAt] = useState("");
+  const [updatedAt, setUpdatedAt] = useState("");
+  const [courseTeacher,setCourseTeacher]=useState({})
 
   // useEffect(() => {
   //   fetch(`http://localhost:4000/v1/courses/${canvas}`, {
@@ -28,19 +29,20 @@ export default function CourseInfo() {
   useEffect(() => {
     apiRequests(`/courses/${courseName}`)
       .then((data) => {
-        console.log('course', data)
-        setComments(data.comments)
-        setSessions(data.sessions)
-        setCourseDetails(data)
-        setCreatedAt(data.createdAt)
-        setUpdatedAt(data.updatedAt)
+        setComments(data.comments);
+        setSessions(data.sessions);
+        setCourseDetails(data);
+        setCreatedAt(data.createdAt);
+        setUpdatedAt(data.updatedAt);
+        setCourseTeacher(data.creator)
+        console.log('fff',data);
       })
       .catch((err) => {
         if (err.res === 402) {
-          alert('errorrr402')
+          alert("errorrr402");
         }
-      })
-  }, [courseName])
+      });
+  }, [courseName]);
 
   return (
     <>
@@ -70,9 +72,7 @@ export default function CourseInfo() {
               <a href="#" className="course-info__link">
                 {courseDetails?.categoryID.title}
               </a>
-              <h1 className="course-info__title">
-                {courseDetails?.name}
-              </h1>
+              <h1 className="course-info__title">{courseDetails?.name}</h1>
               <p className="course-info__text">
                 {courseDetails?.description}
                 <br />
@@ -118,7 +118,11 @@ export default function CourseInfo() {
                     <CourseDetailBox
                       icon="graduation-cap"
                       title="وضعیت دوره:"
-                      text={courseDetails?.isComplete ? 'به اتمام رسیده' : 'در حال برگزاری'}
+                      text={
+                        courseDetails?.isComplete
+                          ? "به اتمام رسیده"
+                          : "در حال برگزاری"
+                      }
                     />
                     <CourseDetailBox
                       icon="clock"
@@ -236,29 +240,29 @@ export default function CourseInfo() {
                   <div className="introduction__topic">
                     <Accordion defaultActiveKey="0">
                       <Accordion.Item eventKey="0" className="accordion">
-                        <Accordion.Header>
-                          { }
-                        </Accordion.Header>
-                        {
-                          sessions.map(((session,index) => (
-                            <Accordion.Body className="introduction__accordion-body">
-                              <div className="introduction__accordion-right">
-                                <span className="introduction__accordion-count">{index +1}</span>
-                                <i className="fab fa-youtube introduction__accordion-icon"></i>
-                                <a href="#" className="introduction__accordion-link">
+                        <Accordion.Header>{}</Accordion.Header>
+                        {sessions.map((session, index) => (
+                          <Accordion.Body className="introduction__accordion-body">
+                            <div className="introduction__accordion-right">
+                              <span className="introduction__accordion-count">
+                                {index + 1}
+                              </span>
+                              <i className="fab fa-youtube introduction__accordion-icon"></i>
+                              <a
+                                href="#"
+                                className="introduction__accordion-link"
+                              >
                                 {session.title}
-                                </a>
-                              </div>
-                              <div className="introduction__accordion-left">
-                                <span className="introduction__accordion-time">
-                                 {session.time}
-                                </span>
-                              </div>
-                            </Accordion.Body>
-                          )))
-                        }
+                              </a>
+                            </div>
+                            <div className="introduction__accordion-left">
+                              <span className="introduction__accordion-time">
+                                {session.time}
+                              </span>
+                            </div>
+                          </Accordion.Body>
+                        ))}
                       </Accordion.Item>
-
                     </Accordion>
                   </div>
                 </div>
@@ -271,32 +275,30 @@ export default function CourseInfo() {
                     <div className="techer-details__header-right">
                       <img
                         src="/images/info/teacher.jfif"
+                        // src={courseTeacher.profile}
                         alt="Teacher Profile"
                         className="techer-details__header-img"
                       />
                       <div className="techer-details__header-titles">
                         <a href="#" className="techer-details__header-link">
-                          محمدامین سعیدی راد
+                          {courseTeacher.name}
                         </a>
                         <span className="techer-details__header-skill">
-                          Front End & Back End Developer
+                          {courseTeacher.phone}
                         </span>
                       </div>
                     </div>
                     <div className="techer-details__header-left">
                       <i className="fas fa-chalkboard-teacher techer-details__header-icon"></i>
-                      <span className="techer-details__header-name">مدرس</span>
+                      <span className="techer-details__header-name">{courseTeacher.role}</span>
                     </div>
                   </div>
                   <p className="techer-details__footer">
-                    اول از همه برنامه نویسی اندروید رو شروع کردم و نزدیک به 2
-                    سال با زبان جاوا اندروید کار میکردم .بعد تصمیم گرفتم در
-                    زمینه وب فعالیت داشته باشم.و..
+                   {courseTeacher.email}
                   </p>
                 </div>
 
                 {/* Finish Teacher Details */}
-
               </div>
             </div>
 
@@ -310,8 +312,8 @@ export default function CourseInfo() {
                         <i className="fas fa-graduation-cap course-info__register-icon"></i>
                       </span>
                     ) : (
-                      < div >
-                        <Link to='/login' >ثبت نام در دوره </Link>
+                      <div>
+                        <Link to="/login">ثبت نام در دوره </Link>
                       </div>
                     )}
                   </div>
@@ -324,7 +326,9 @@ export default function CourseInfo() {
                         <span className="course-info__total-sale-text">
                           تعداد دانشجو :
                         </span>
-                        <span className="course-info__total-sale-number">{courseDetails?.courseStudentsCount}</span>
+                        <span className="course-info__total-sale-number">
+                          {courseDetails?.courseStudentsCount}
+                        </span>
                       </div>
                     </div>
                     <div className="course-info__bottom">
@@ -346,14 +350,18 @@ export default function CourseInfo() {
                 <div className="course-info">
                   <div className="course-info__header-short-url">
                     <i className="fas fa-link course-info__short-url-icon"></i>
-                    <span className="course-info__short-url-text">لینک کوتاه</span>
+                    <span className="course-info__short-url-text">
+                      لینک کوتاه
+                    </span>
                   </div>
                   <span className="course-info__short-url">
                     https://sabzlearn.ir/?p=117472
                   </span>
                 </div>
                 <div className="course-info">
-                  <span className="course-info__topic-title">سرفصل های دوره</span>
+                  <span className="course-info__topic-title">
+                    سرفصل های دوره
+                  </span>
                   <span className="course-info__topic-text">
                     برای مشاهده و یا دانلود دوره روی کلمه
                     <a href="#" style={{ color: "blue", fontWeight: "bold" }}>
@@ -363,7 +371,9 @@ export default function CourseInfo() {
                   </span>
                 </div>
                 <div className="course-info">
-                  <span className="course-info__courses-title">دوره های مرتبط</span>
+                  <span className="course-info__courses-title">
+                    دوره های مرتبط
+                  </span>
                   <ul className="course-info__courses-list">
                     <li className="course-info__courses-list-item">
                       <a href="#" className="course-info__courses-link">
@@ -418,9 +428,9 @@ export default function CourseInfo() {
               </div>
             </div>
           </div>
-        <CommentsTextArea comments={comments} />
-        </div >
-      </main >
+          <CommentsTextArea comments={comments} />
+        </div>
+      </main>
 
       <Footer />
     </>

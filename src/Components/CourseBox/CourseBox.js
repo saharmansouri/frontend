@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './CourseBox.css'
 import CircleSpinner from '../CircleSpinner/CircleSpinner'
+import { Link } from 'react-router-dom'
 
 export default function CourseBox(props) {
   const [isImgShow, setIsImgShow] = useState(false)
@@ -12,16 +13,16 @@ export default function CourseBox(props) {
   return (
     <div className="col-4">
       <div className="course-box">
-        <a href="#">
+        <Link to='/course-info/${`props.shortName`}'>
           <img
-          src={props.cover} alt="Course img" className="course-box__img" onLoad={loadingImg} />
+          src='./images/courses/js_project.png' alt="Course img" className="course-box__img" onLoad={loadingImg} />
           {
             !isImgShow &&
             <CircleSpinner />
           }
-        </a>
+        </Link>
         <div className="course-box__main">
-          <a href="#" className="course-box__title">{props.name}</a>
+          <Link to='/course-info/${`props.shortName`}' className="course-box__title">{props.name}</Link>
 
           <div className="course-box__rating-teacher">
             <div className="course-box__teacher">
@@ -42,15 +43,23 @@ export default function CourseBox(props) {
               <i className="fas fa-users course-box__users-icon"></i>
               <span className="course-box__users-text">{props.user}</span>
             </div>
-            <span className="course-box__price">{props.price}</span>
+            <span className="course-box__price">
+            {
+              props.price === 0 ? 'free Course' : 
+              <>
+              {props.price?.toLocaleString()}
+              </>
+            }
+           
+            </span>
           </div>
         </div>
 
         <div className="course-box__footer">
-          <a href="#" className="course-box__footer-link">
-            {props.btnCource}
-            <i className="fas fa-arrow-left course-box__footer-icon"></i>
-          </a>
+          <Link to='/course-info/${`props.shortName`}' className="course-box__footer-link">
+          مشاهده اطلاعات
+          <i className="fas fa-arrow-left course-box__footer-icon"></i>
+          </Link>
         </div>
 
       </div>
