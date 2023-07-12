@@ -1,24 +1,58 @@
-import logo from './logo.svg';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css';
+import AuthContext from './context/authContext';
+import routes from './routes';
+import { useRoutes } from 'react-router-dom'
 
 function App() {
+  const router = useRoutes(routes)
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [token, setToken] = useState(false)
+  const [userInfos, setUserInfos] = useState({})
+
+  const login = useCallback((userInfos, token) => {
+    setToken(token)
+    setIsLoggedIn(true)
+    setUserInfos(userInfos)
+    localStorage.setItem('user', JSON.stringify({ token }))
+  }, []
+  )
+  const logout = useCallback(() => {
+    setToken(null)
+    setUserInfos({})
+    localStorage.removeItem('user')
+  }, [])
+
+  useEffect(() => {
+    const localStorageData = JSON.parse(localStorage.getItem('user'))
+    if (localStorageData) {
+      fetch('http://localhost:4000/v1/auth/me', {
+        headers: {
+          'Authorization': `Bearer ${localStorageData.token}`
+        }
+      }).then(res => res.json()).then(userData => {
+        setIsLoggedIn(true)
+        setUserInfos(userData)
+      })
+    }
+  }, [login])
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn,
+        token,
+        userInfos,
+        login,
+        logout,
+      }}
+    >
+      {router}
+    </AuthContext.Provider>
   );
 }
 
