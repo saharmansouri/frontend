@@ -23,7 +23,7 @@ export default function Pagination({ items, itemsCount, pathname, setShownCourse
       <ul className="courses__pagination-list">
       {
         Array(pagesCount).fill(0).map((item,index)=>(
-         <li className="courses__pagination-item">
+         <li key={index} className="courses__pagination-item">
               {index + 1 === Number(page) ? (
                 <Link
                   to={`${pathname}/${index + 1}`}

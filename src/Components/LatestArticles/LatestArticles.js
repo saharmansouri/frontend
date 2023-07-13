@@ -20,7 +20,8 @@ export default function LatestArticles() {
           <SectionHeader
             title="جدیدترین مقاله ها"
             desc="پیش به سوی ارتقای دانش"
-            btnTitle="تمامی دوره ها"
+            btnTitle="تمامی  مقاله ها"
+            btnHref='allarticles/1'
           />
 
           <div className="articles__content">
@@ -28,9 +29,6 @@ export default function LatestArticles() {
               {allArticles.slice(0, 3).map((article) => (
                 <ArticleBox
                   {...article}
-                  //   title=" نحوه نصب کتابخانه در پایتون | آموزش نصب کتابخانه پایتون"
-                  //   desc="زبان پایتون هم مانند دیگر زبان­های برنامه نویسی رایج، دارای کتابخانه های مختلفی برای تسریع..."
-                  //   cover="images/blog/3.jpg"
                 />
               ))}
             </div>
