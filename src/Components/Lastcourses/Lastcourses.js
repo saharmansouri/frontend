@@ -21,13 +21,13 @@ export default function Lastcourses() {
     return (
         <div className="courses">
             <div className="container">
-                <SectionHeader title='جدیدترین دوره ها' desc='سکوی پرتاپ شما به سمت موفقیت' btnTitle='تمامی دوره ها' btnHref='courses' />
+                <SectionHeader title='جدیدترین دوره ها' desc='سکوی پرتاپ شما به سمت موفقیت' btnTitle='تمامی دوره ها' btnHref='courses/1' />
             </div>
             <div className='courses-content'>
                 <div className='container'>
                     <div className='row'>
                         {
-                            courses.map((course) => (
+                            courses.splice(0,6).map((course) => (
                                 <CourseBox {...course} />
                             ))
                         }
