@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import "./Landing.css";
 import Typewriter from "typewriter-effect";
 import LandingCounter from "../LandingCounter/LandingCounter";
+import { useNavigate } from "react-router-dom";
 
 export default function Landing(props) {
   const [searchBarValue, setSearchBarValue] = useState("");
+  const navigate =useNavigate()
 
   const goToSearch =()=>{
+    console.log('search');
+    navigate(`/search/${searchBarValue}`)
+
 
   }
   return (
