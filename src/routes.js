@@ -9,18 +9,31 @@ import Register from "./Pages/Register/Register";
 import AllArticles from "./Pages/AllArticles/AllArticles";
 import Contact from "./Pages/Contact/Contact";
 import Search from "./Pages/Search/Search";
+import AdminPanel from "./Pages/AdminPanel/Index";
+import Users from "./Pages/AdminPanel/Users/Users";
+import Menus from "./Pages/AdminPanel/Menus/Menus";
+import Articles from "./Pages/AdminPanel/Articles/Articles";
 
 const routes = [
   { path: "/", element: <Index /> },
   { path: "/course-info/:courseName", element: <CourseInfo /> },
   { path: "/category-info/:categoryName/:page", element: <Category /> },
   { path: "/article-info/:articleName", element: <ArticleInfo /> },
-  { path: '/courses/:page', element: <Courses /> },
+  { path: "/courses/:page", element: <Courses /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
   { path: "/allarticles/:page", element: <AllArticles /> },
   { path: "/contactus", element: <Contact /> },
   { path: "/search/:valueUser", element: <Search /> },
+  {
+    path: "/p-admin/*",
+    element: <AdminPanel />,
+    children: [
+      { path: "users", element: <Users /> },
+      { path: "menus", element: <Menus /> },
+      { path: "articles", element: <Articles /> },
+    ],
+  },
 ];
 
 export default routes;
