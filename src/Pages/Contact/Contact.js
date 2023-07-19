@@ -9,7 +9,6 @@ import {
   maxValidator,
   emailValidator,
 } from '../../Components/Validators/rules'
-import apiRequest from '../../Servicse/Axios/configs'
 
 import "./Contact.css";
 import { useForm } from "../../hooks/useForm";
@@ -41,20 +40,21 @@ export default function Contact() {
 
   const addNewContact = (event) => {
     event.preventDefault()
-    // const newContactInfo = {
-    //    name:formState.Inputs.name.value,
-    //    email:formState.Inputs.email.value,
-    //    phone:formState.Inputs.phone.value,
-    //    body:formState.Inputs.body.value,
-    // }
-    // fetch('http://localhost:4000/v1/contact'  ,{
-    //     method:'POST',
-    //     Headers:{
-    //         'Content-Type' : 'application/json'
-    //     },
-    //     body:JSON.stringify(newContactInfo),
-    //   }).then(res=>res.json())
-    //   .then(result=>console.log('post contct',result))
+    console.log('ارسال شد')
+    const newContactInfo = {
+      name:formState.Inputs?.name.value,
+       email:formState.Inputs?.email.value,
+       phone:formState.Inputs?.phone.value,
+       body:formState.Inputs?.body.value,
+    }
+    fetch('http://localhost:4000/v1/contact'  ,{
+        method:'POST',
+        Headers:{
+            'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify(newContactInfo),
+      }).then(res=>res.json())
+      .then(result=>console.log('post contct',result))
     }      
 
 

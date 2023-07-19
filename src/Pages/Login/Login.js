@@ -7,7 +7,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Topbar from "../../Components/Topbar/Topbar";
 import { useForm } from "../../hooks/useForm";
 import AuthContext from "../../context/authContext";
-import swal from 'sweetalert'
+import swal from "sweetalert";
 
 import {
   requiredValidator,
@@ -16,11 +16,11 @@ import {
 } from "../../Components/Validators/rules";
 
 import "./Login.css";
-import ReCAPTCHA from 'react-google-recaptcha'
+import ReCAPTCHA from "react-google-recaptcha";
 export default function Login() {
-  const [googleRecaptchaVerify,setGoogleRecaptchaVerify]=useState(false)
-  const authContext = useContext(AuthContext)
-  const navigate = useNavigate()
+  const [googleRecaptchaVerify, setGoogleRecaptchaVerify] = useState(false);
+  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [formState, onInputHandler] = useForm(
     {
@@ -36,12 +36,11 @@ export default function Login() {
     false
   );
 
-
   const userLogin = (event) => {
     event.preventDefault();
     const userData = {
       identifier: formState.inputs.username.value,
-      password: formState.inputs.password.value
+      password: formState.inputs.password.value,
     };
     fetch(`http://localhost:4000/v1/auth/login`, {
       method: "POST",
@@ -50,41 +49,41 @@ export default function Login() {
       },
       body: JSON.stringify(userData),
     })
-      .then(res => {
-        console.log('ressssssss', res);
+      .then((res) => {
+        console.log("ressssssss", res);
         if (!res.ok) {
-          return res.text()
-            .then(text => {
-              throw new Error(text)
-            })
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
         } else {
-          return res.json()
+          return res.json();
         }
-      }).then((result) => {
-        swal({
-          buttons: 'ok',
-          icon: 'success',
-          title: 'با موفقیت وارد شدید.'
-        }).then(value => {
-          navigate('/')
-        })
-        authContext.login(result.user, result.accessToken)
       })
-      .catch(err => {
+      .then((result) => {
         swal({
-          title: 'نام کاربری یا رمز عبور اشتباه است.',
-          icon: 'error',
-          buttons: 'ok'
-        })
+          buttons: "ok",
+          icon: "success",
+          title: "با موفقیت وارد شدید.",
+        }).then((value) => {
+          navigate("/");
+        });
+        authContext.login(result.user, result.accessToken);
       })
+      .catch((err) => {
+        swal({
+          title: "نام کاربری یا رمز عبور اشتباه است.",
+          icon: "error",
+          buttons: "ok",
+        });
+      });
   };
 
   const onChangeHandler = () => {
-    console.log('verify google');
-    setGoogleRecaptchaVerify(true)
-  }
+    console.log("verify google");
+    setGoogleRecaptchaVerify(true);
+  };
 
-  console.log('formstate', formState);
+  console.log("formstate", formState);
   return (
     <>
       <Topbar />
@@ -137,16 +136,17 @@ export default function Login() {
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
             <div className="recaptcha">
-            <ReCAPTCHA
-              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-              onChange={onChangeHandler}
-            />
+              <ReCAPTCHA
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                onChange={onChangeHandler}
+              />
             </div>
             <Button
-              className={`login-form__btn ${formState.isFormValid && googleRecaptchaVerify
-                ? "login-form__btn-success"
-                : "login-form__btn-error"
-                }`}
+              className={`login-form__btn ${
+                formState.isFormValid && googleRecaptchaVerify
+                  ? "login-form__btn-success"
+                  : "login-form__btn-error"
+              }`}
               type="submit"
               onClick={userLogin}
               disabled={!formState.isFormValid || !googleRecaptchaVerify}

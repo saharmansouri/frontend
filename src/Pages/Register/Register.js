@@ -1,19 +1,25 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import Button from "../../Components/Form/Button";
 import Input from "../../Components/Form/Input";
 import Navbar from "../../Components/Navbar/Navbar";
 import Topbar from "../../Components/Topbar/Topbar";
 import { useForm } from "../../hooks/useForm";
-import { emailValidator, maxValidator, minValidator, requiredValidator } from "../../Components/Validators/rules";
+import {
+  emailValidator,
+  maxValidator,
+  minValidator,
+  requiredValidator,
+} from "../../Components/Validators/rules";
 import AuthContext from "../../context/authContext";
 import "./Register.css";
-import ReCAPTCHA from 'react-google-recaptcha'
+import ReCAPTCHA from "react-google-recaptcha";
+import swal from "sweetalert";
 export default function Register() {
-
-  const authContext = useContext(AuthContext)
-  const [googleRecaptcha,setGoogleRecaptcha]=useState(false)
+  const authContext = useContext(AuthContext);
+  const [googleRecaptcha, setGoogleRecaptcha] = useState(false);
+  const navigate = useNavigate();
   const [formState, onInputHandler] = useForm(
     {
       name: {
@@ -32,6 +38,10 @@ export default function Register() {
         value: "",
         isValid: false,
       },
+      phone: {
+        value: "",
+        isValid: false,
+      },
     },
     false
   );
@@ -47,6 +57,7 @@ export default function Register() {
       email: formState.inputs.email.value,
       password: formState.inputs.password.value,
       confirmPassword: formState.inputs.password.value,
+      phone: formState.inputs.phone.value,
     };
 
     fetch(`http://localhost:4000/v1/auth/register`, {
@@ -56,17 +67,33 @@ export default function Register() {
       },
       body: JSON.stringify(newUserInfos),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log("res", res);
+        if (res.ok) {
+          return res.json();
+        } else {
+          if (res.status === 403) {
+            swal({
+              title: "Error!",
+              text: `شماره همراه شما بن شده است.`,
+              icon: "error",
+              buttons: "ok",
+            });
+          }
+        }
+      })
       .then((result) => {
-        authContext.login(result.user, result.accessToken)
+        console.log("result", result);
+        authContext.login(result?.user, result?.accessToken);
       });
 
     console.log("User Register");
+    navigate("/");
   };
 
-  const onChangeHandler =()=>{
-    setGoogleRecaptcha(true)
-  }
+  const onChangeHandler = () => {
+    setGoogleRecaptcha(true);
+  };
 
   return (
     <>
@@ -152,18 +179,30 @@ export default function Register() {
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
-            <div className="recaptcha" >
-            <ReCAPTCHA
-              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-              onChange={onChangeHandler}
-            />
-
+            <div className="login-form__password">
+              <Input
+                type="number"
+                placeholder="شماره تلفن "
+                className="login-form__username-input"
+                element="input"
+                id="phone"
+                onInputHandler={onInputHandler}
+                validations={[requiredValidator(), minValidator(11)]}
+              />
+              <i className="login-form__username-icon fa fa-user"></i>
+            </div>
+            <div className="recaptcha">
+              <ReCAPTCHA
+                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                onChange={onChangeHandler}
+              />
             </div>
             <Button
-              className={`login-form__btn ${formState.isFormValid && googleRecaptcha
-                ? "login-form__btn-success"
-                : "login-form__btn-error"
-                }`}
+              className={`login-form__btn ${
+                formState.isFormValid && googleRecaptcha
+                  ? "login-form__btn-success"
+                  : "login-form__btn-error"
+              }`}
               type="submit"
               onClick={registerNewUser}
               disabled={!formState.isFormValid || !googleRecaptcha}

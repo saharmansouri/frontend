@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import apiRequests from "../../../Servicse/Axios/configs";
 
 export default function Topbar() {
   const [adminInfoTopbar, setAdminInfoTopbar] = useState([]);
@@ -19,9 +18,20 @@ export default function Topbar() {
         console.log("data", data);
         setAdminInfoTopbar(data);
         setAdminNotif(data.notifications);
-        console.log("sec", adminNotif);
+        console.log("notifications", adminNotif);
       });
   }, []);
+
+  function seeNotifiction(notficationId) {
+    const localStorageData = JSON.parse(localStorage.getItem("user"));
+    console.log("notficationId", notficationId);
+    fetch(`http://localhost:4000/v1/notifications/see/${notficationId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+      },
+    }).then((res) => res.json());
+  }
   return (
     <div class="container-fluid">
       <div class="container">
@@ -41,24 +51,31 @@ export default function Topbar() {
               onMouseLeave={() => setOnShowNotif(false)}
             >
               <ul class="home-notification-modal-list ">
-                {adminNotif.map((notification) => (
-                  <li class="home-notification-modal-item">
-                    <span class="home-notification-modal-text">
-                      {notification}
-                    </span>
-                    <label class="switch">
-                      <a href="javascript:void(0)"> Read </a>
-                    </label>
-                  </li>
-                ))}
-                <li class="home-notification-modal-item">
-                  <span class="home-notification-modal-text">پیغام جدید</span>
-                  <label class="switch">
-                    <a href="javascript:void(0)"> خواندم </a>
-                    {/* <input type="checkbox" checked />
-                    <span class="slider round"></span> */}
-                  </label>
-                </li>
+                {adminNotif.length === 0 ? (
+                  <>
+                    <li class="home-notification-modal-item">
+                      اطلاعیه جدیدی وجود ندارد.
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    {adminNotif.map((notification) => (
+                      <li class="home-notification-modal-item">
+                        <span class="home-notification-modal-text">
+                          {notification.msg}
+                        </span>
+                        <label class="switch">
+                          <a
+                            href="javascript:void(0)"
+                            onClick={() => seeNotifiction(notification._id)}
+                          >
+                            Read
+                          </a>
+                        </label>
+                      </li>
+                    ))}
+                  </>
+                )}
               </ul>
             </div>
           </div>

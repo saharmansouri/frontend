@@ -48,7 +48,7 @@ export default function Input(props) {
         placeholder={props.placeholder}
         className={`${props.className} ${
           mainInput.isValid ? "success" : "error"
-        }`}
+        } mb-3 ` }
         value={mainInput.value}
         onChange={onChangeHandler}
       />
