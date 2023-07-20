@@ -21,13 +21,13 @@ export default function Navbar() {
       <div className="container-fluid">
         <div className="main-header__content">
           <div className="main-header__right">
-          <Link to='/' className="course-info__link">
-          <img
-          src="/images/logo/Logo.png"
-          className="main-header__logo"
-          alt="لوگوی سبزلرن"
-          />
-          </Link>
+            <Link to="/" className="course-info__link">
+              <img
+                src="/images/logo/Logo.png"
+                className="main-header__logo"
+                alt="لوگوی سبزلرن"
+              />
+            </Link>
 
             <ul className="main-header__menu">
               {allMenus.map((menu) => (
@@ -69,7 +69,7 @@ export default function Navbar() {
             </a>
 
             {authContext.isLoggedIn ? (
-              <Link to="#" className="main-header__profile">
+              <Link to="/admin" className="main-header__profile">
                 <span className="main-header__profile-text">
                   {authContext.userInfos?.name}
                 </span>

@@ -18,8 +18,8 @@ export default function CourseInfo() {
   const [courseDetails, setCourseDetails] = useState();
   const [createdAt, setCreatedAt] = useState("");
   const [updatedAt, setUpdatedAt] = useState("");
-  const [courseTeacher,setCourseTeacher]=useState({})
-
+  const [courseTeacher, setCourseTeacher] = useState({});
+  const [courseCategory, setCourseCategory] = useState([]);
   // useEffect(() => {
   //   fetch(`http://localhost:4000/v1/courses/${canvas}`, {
   //     method: 'GET',
@@ -34,8 +34,9 @@ export default function CourseInfo() {
         setCourseDetails(data);
         setCreatedAt(data.createdAt);
         setUpdatedAt(data.updatedAt);
-        setCourseTeacher(data.creator)
-        console.log('fff',data);
+        setCourseTeacher(data.creator);
+        setCourseCategory(data.categoryID);
+        console.log("fff", data);
       })
       .catch((err) => {
         if (err.res === 402) {
@@ -70,7 +71,7 @@ export default function CourseInfo() {
           <div className="row">
             <div className="col-6">
               <a href="#" className="course-info__link">
-                {courseDetails?.categoryID.title}
+                {courseCategory.title}
               </a>
               <h1 className="course-info__title">{courseDetails?.name}</h1>
               <p className="course-info__text">
@@ -290,11 +291,13 @@ export default function CourseInfo() {
                     </div>
                     <div className="techer-details__header-left">
                       <i className="fas fa-chalkboard-teacher techer-details__header-icon"></i>
-                      <span className="techer-details__header-name">{courseTeacher.role}</span>
+                      <span className="techer-details__header-name">
+                        {courseTeacher.role}
+                      </span>
                     </div>
                   </div>
                   <p className="techer-details__footer">
-                   {courseTeacher.email}
+                    {courseTeacher.email}
                   </p>
                 </div>
 

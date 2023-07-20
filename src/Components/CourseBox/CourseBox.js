@@ -15,7 +15,7 @@ export default function CourseBox(props) {
       <div className="course-box">
         <Link to='/course-info/${`props.shortName`}'>
           <img
-          src='./images/courses/js_project.png' alt="Course img" className="course-box__img" onLoad={loadingImg} />
+          src={props.cover} alt="Course img" className="course-box__img" onLoad={loadingImg} />
           {
             !isImgShow &&
             <CircleSpinner />
