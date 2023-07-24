@@ -16,6 +16,7 @@ import Articles from "./Pages/AdminPanel/Articles/Articles";
 import AllCourses from './Pages/AdminPanel/AllCourses/AllCourses'
 import AdminCategory from './Pages/AdminPanel/Category/Category'
 import AdminUser from './Pages/UserPanel/index'
+import ContactAdmin from "./Pages/AdminPanel/ContactUs/ContactUs";
 const routes = [
   { path: "/", element: <Index /> },
   { path: "/course-info/:courseName", element: <CourseInfo /> },
@@ -37,6 +38,7 @@ const routes = [
       { path: "articles", element: <Articles /> },
       { path: "allCourses", element: <AllCourses /> },
       { path: "category", element: <AdminCategory /> },
+      { path: "contactadmin", element: <ContactAdmin /> },
     ],
   },
 ];

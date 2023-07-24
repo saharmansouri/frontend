@@ -5,12 +5,14 @@ import swal from "sweetalert";
 import { minValidator } from "../../../Components/Validators/rules";
 import Input from "../../../Components/Form/Input";
 import { useForm } from "../../../hooks/useForm";
-
+import "./Articles.css";
+import Editor from "../../../Components/Form/Editor";
 function Articles() {
   const [allArticle, setAllArticle] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [articleCategory, setArticleCategory] = useState("-1");
   const [articleCover, setArticleCover] = useState("-1");
+  const [articleBody, setArticleBody] = useState("");
   const [formState, onInputHandler] = useForm(
     {
       cover: {
@@ -79,6 +81,64 @@ function Articles() {
       }
     });
   };
+
+  // const createNewArticle = (event) => {
+  //   event.preventDefault();
+  //   const localStorageData=JSON.parse(localStorage.getItem('user'))
+  //   let formData = new FormData()
+  //   formData.append("title", formState.inputs.title.value);
+  //   formData.append("shortName", formState.inputs.shortName.value);
+  //   formData.append("description", formState.inputs.description.value);
+  //   formData.append('cover',articleCover)
+  //   formData.append('categoryID',articleCategory)
+  //   formData.append('body',articleBody)
+  //   fetch(`http://localhost:4000/v1/articles`,{
+  //     method:'POST',
+  //    headers:{
+  //     'Autorization':`Bearer ${localStorageData.token}`
+  //    },
+  //    body:formData
+  //   }).then(res=>{
+  //     if(res.ok){
+  //       swal({
+  //         title:'موفق',
+  //         text:'مقاله با موفقیت اضافه شد',
+  //         icon:'success'
+  //       }).then(()=>{
+  //         getAllArticles()
+  //       })
+  //     }
+  //   })
+  // };
+  const createNewArticle = event => {
+    event.preventDefault()
+    const localStorageDate = JSON.parse(localStorage.getItem('user'))
+    let formData = new FormData()
+    formData.append('title', formState.inputs.title.value)
+    formData.append('shortName', formState.inputs.shortName.value)
+    formData.append('description', formState.inputs.description.value)
+    formData.append('categoryID', articleCategory)
+    formData.append('cover', articleCover)
+    formData.append('body', articleBody)
+
+    fetch(`http://localhost:4000/v1/articles`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorageDate.token}`
+      },
+      body: formData
+    }).then(res => {
+      if(res.ok) {
+        swal({
+          title: 'مقاله جدید با موفقیت ایجاد شد',
+          icon: 'success',
+          buttons: 'اوکی'
+        }).then(() => {
+          getAllArticles()
+        })
+      }
+    })
+  }
   return (
     <>
       <div class="container-fluid" id="home-content">
@@ -87,13 +147,12 @@ function Articles() {
             <span>افزودن مقاله جدید</span>
           </div>
           <form class="form">
-            <div >
-              <div class="name input displayInput">
+            <div class="col-6">
+              <div class="name input">
                 <label class="input-title" style={{ display: "block" }}>
                   عنوان
                 </label>
                 <Input
-                  className="col-6"
                   element="input"
                   type="text"
                   id="title"
@@ -102,12 +161,13 @@ function Articles() {
                 />
                 <span class="error-message text-danger"></span>
               </div>
+            </div>
+            <div class="col-6">
               <div class="name input">
                 <label class="input-title" style={{ display: "block" }}>
                   لینک
                 </label>
                 <Input
-                  className="col-6"
                   element="input"
                   type="text"
                   id="shortName"
@@ -117,19 +177,30 @@ function Articles() {
                 <span class="error-message text-danger"></span>
               </div>
             </div>
-            <div class="name input">
-              <label class="input-title" style={{ display: "block" }}>
-                توضیح کوتاه
-              </label>
-              <Input
-                element="textarea"
-                type="text"
-                id="description"
-                onInputHandler={onInputHandler}
-                validations={[minValidator(20)]}
-                className={"article-textarea"}
-              />
-              <span class="error-message text-danger"></span>
+            <div class="col-12">
+              <div class="name input">
+                <label class="input-title" style={{ display: "block" }}>
+                  چکیده
+                </label>
+                <Input
+                  element="textarea"
+                  type="text"
+                  id="description"
+                  onInputHandler={onInputHandler}
+                  validations={[minValidator(5)]}
+                  className="article-textarea"
+                />
+                <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="name input">
+                <label class="input-title" style={{ display: "block" }}>
+                  محتوا
+                </label>
+                <Editor value={articleBody} setValue={setArticleBody} />
+                <span class="error-message text-danger"></span>
+              </div>
             </div>
             <div class="col-6">
               <div class="name input">
@@ -153,14 +224,23 @@ function Articles() {
                 <select
                   onChange={(event) => setArticleCategory(event.target.value)}
                 >
-                  <option value="-1">
-                    دسته بندی مقاله خود را انتخاب کنید.
-                  </option>
+                  <option value="-1">دسته بندی مقاله را انتخاب کنید،</option>
                   {allCategories.map((category) => (
                     <option value={category._id}>{category.title}</option>
                   ))}
                 </select>
                 <span class="error-message text-danger"></span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="bottom-form">
+                <div class="submit-btn">
+                  <input
+                    type="submit"
+                    value="افزودن"
+                    onClick={createNewArticle}
+                  />
+                </div>
               </div>
             </div>
           </form>

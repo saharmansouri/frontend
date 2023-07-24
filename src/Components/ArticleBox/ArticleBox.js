@@ -15,7 +15,7 @@ export default function ArticleBox({ title, cover, description, shortName }) {
             className="article-card__link-img"
           >
             <img
-              src={cover}
+              src={`http://localhost:4000/article/${cover}`}
               className="article-card__img"
               alt="Article Cover"
               onLoad={() => setIsImgShow(true)}

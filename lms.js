@@ -11,7 +11,7 @@
  Target Server Version : 60007 (6.0.7)
  File Encoding         : 65001
 
- Date: 20/07/2023 15:55:08
+ Date: 24/07/2023 17:08:59
 */
 
 
@@ -36,7 +36,7 @@ db.getCollection("articles").insert([ {
     title: "مقایسه ویو و ری اکت",
     description: "توضیحات تستی برای مقاله مقایسه ویو و ری اکت",
     body: "بادی تستی برای مقاله مقایسه ویو و ری اکت",
-    cover: "3.jpg",
+    cover: "4.png",
     shortName: "vue-or-react",
     categoryID: ObjectId("6345cbd132c10de974957632"),
     creator: ObjectId("634e6b0e1d5142b91afa9bb3"),
@@ -50,7 +50,7 @@ db.getCollection("articles").insert([ {
     title: "چرا انگیولار محبوب نشد؟",
     description: "توضیحات تستی برای مقاله چرا انگیولار محبوب نشد؟",
     body: "بادی تستی برای مقاله چرا انگیولار محبوب نشد؟",
-    cover: "4.png",
+    cover: "3.jpg",
     shortName: "why-angular-in-not-popular",
     categoryID: ObjectId("6345cbd132c10de974957632"),
     creator: ObjectId("634e6b0e1d5142b91afa9bb3"),
@@ -78,7 +78,7 @@ db.getCollection("articles").insert([ {
     title: "برای یادگیری ری‌اکت چقدر باید جاوا اسکریپت بلد باشیم؟",
     description: "تو این مقاله راجع به فلان فلانم فلان بسزنرحیبسزژ ریبسکنتلزردیسبر",
     body: "<h2><strong>معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:</strong></h2><p>&nbsp;</p><p><strong>توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه شما باید یا تسلط متوسط و حداقلی به زبان انگلیسی داشته باشید و یا اینکه با استفاده از گوگل ترنسلیت منابع موجود را ترجمه کرده و از آن‌ها استفاده کنید. به همین دلیل در انتهای محتوا به شما خواهیم گفت که راه آسان دیگری برای یادگیری زبان جاوا اسکریپت وجود دارد که شما بتوانید به واسطه آن به صورت رایگان و به زبان فارسی این زبان را یاد بگیرید.</strong></p>",
-    cover: "56108e0f5399b79e348989b1c04f7c2ce3ad429546ed59d1d7420898ca5591c4.png",
+    cover: "3.jpg",
     shortName: "how-much-js-to-start-react",
     categoryID: ObjectId("6345cbd132c10de974957632"),
     creator: ObjectId("634e6b0e1d5142b91afa9bb3"),
@@ -92,7 +92,7 @@ db.getCollection("articles").insert([ {
     title: "ساخت صفحات 404 جذاب با Css و JS",
     description: "ما تو این مقاله یاد میگیریم که چطوری ، ... الی آخر",
     body: "<h2>ساخت صفحه 404 مدل فلان</h2><p>ری اکت گل سرسبد فرانت اند محسوب میشود،اگر دوره react را ببینید، بازار کار فرانت اند پیشنهادهای بسیار شگفت انگیزی برای شما خواهد داشت! در این دوره شما آموزش ری اکت رابر اساس تجربیات مدرس در دنیای واقعی و کار با شرکت های مختلف ایرانی یاد می گیرید و در دوره اموزش ری اکت مدرس دوره از نقطه صفر تا رسیدن شما به مرحله پیاده سازی نمونه کار، طراحی رزومه و … استخدام همراه شما خواهد بود. (به این معنی که تا پس از این دوره استخدام نشوید، ما شما را رها نمیکنیم!)</p>",
-    cover: "a6ffb1ed11bae54f6ef12e55cfa0cc2dfcf640df25b25f70dfa61cbc5703d12f.png",
+    cover: "4.png",
     shortName: "make-creative404-page-with-css-and-js",
     categoryID: ObjectId("6345cbd132c10de974957632"),
     creator: ObjectId("634e6b0e1d5142b91afa9bb3"),
@@ -106,7 +106,7 @@ db.getCollection("articles").insert([ {
     title: "مقاله فیک برای تست پیش نویس",
     description: "این توضیحات تستی برای پیش نویس مقاله هست",
     body: "<p>این یه بادی تستیه</p>",
-    cover: "da877ea96a7e8f7c9bced14ac791f424af4b0b4eab101ef636545c20e9eed116.jpg",
+    cover: "3.jpg",
     shortName: "test-link",
     categoryID: ObjectId("635ef447f058a6af04d00510"),
     creator: ObjectId("634e6bea1d5142b91afa9bb7"),
@@ -120,13 +120,41 @@ db.getCollection("articles").insert([ {
     title: "تفاوت urlSearchParam و QueryString",
     description: "این یک چکیده تستی برای QueryString-vs-urlSearchParam مقاله هست.",
     body: "<p>این توضیحات یسری توضیحات تستی برای QueryString-vs-urlSearchParam مقاله هست.</p><p>ما تو این مقاله میخوام راجع به فلان مقدار باهمدیگه صحبت بکنیم ….</p>",
-    cover: "797e8c56741ef9569f4c060213ba917340419dded819c6014ae60bcdb967a9c0.png",
+    cover: "4.png",
     shortName: "QueryString-vs-urlSearchParam",
     categoryID: ObjectId("6345cbd132c10de974957632"),
     creator: ObjectId("634e6b0e1d5142b91afa9bb3"),
     publish: NumberInt("1"),
     createdAt: ISODate("2023-01-01T09:38:46.059Z"),
     updatedAt: ISODate("2023-01-01T09:38:46.059Z"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("articles").insert([ {
+    _id: ObjectId("64bd2ae0a6388af8e5572612"),
+    title: "تست مقاله",
+    description: "اینجا یه چکیده از متن مقاله رو داریم ",
+    body: "<p>من بلاخره دارم یه حرکت های خفن طوری میزنم و به خاطر این از خودم خیلی راضیم خداروشکر که شرایطی پیش اومد که من بتونم کاری که میخام رو انجام بدم ممنونم از خدا از خودم و از مهندس عسکری و از همممه اطرافیانم که نبودم رو بدخلقی هامو و تمام کمبود هامو تحمل کردن و خیلی هم توی این راه بهم انرژی دادن&nbsp;<br>اگرچه اول راهم اما همین که راه افتادم ینی من بهترینم :-)</p>",
+    cover: "3.jpg",
+    shortName: "testarticle",
+    categoryID: ObjectId("635ef447f058a6af04d00510"),
+    creator: ObjectId("64b53b5b2fe86bc45c31f826"),
+    publish: NumberInt("1"),
+    createdAt: ISODate("2023-07-23T13:28:00.739Z"),
+    updatedAt: ISODate("2023-07-23T13:28:00.739Z"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("articles").insert([ {
+    _id: ObjectId("64bd2c54a6388af8e5572652"),
+    title: "rfgdbfhbfg",
+    description: "dfhbfghygfh",
+    body: "<p>let formData = new FormData()</p><p>&nbsp; // &nbsp; formData.append('title', formState.inputs.title.value)</p><p>&nbsp; // &nbsp; formData.append('shortName', formState.inputs.shortName.value)</p><p>&nbsp; // &nbsp; formData.append('description', formState.inputs.description.value)</p><p>&nbsp; // &nbsp; formData.append('categoryID', articleCategory)</p><p>&nbsp; // &nbsp; formData.append('cover', articleCover)</p><p>&nbsp; // &nbsp; formData.append('body', articleBody)</p>",
+    cover: "3.jpg",
+    shortName: "hfghxgh",
+    categoryID: ObjectId("635ef447f058a6af04d00510"),
+    creator: ObjectId("64b53b5b2fe86bc45c31f826"),
+    publish: NumberInt("1"),
+    createdAt: ISODate("2023-07-23T13:34:12.423Z"),
+    updatedAt: ISODate("2023-07-23T13:34:12.423Z"),
     __v: NumberInt("0")
 } ]);
 
@@ -239,27 +267,27 @@ db.getCollection("categories").insert([ {
     __v: NumberInt("0")
 } ]);
 db.getCollection("categories").insert([ {
-    _id: ObjectId("64b7c213c83a9c7dbe895342"),
-    title: "defdfg",
-    name: "shortname",
-    createdAt: ISODate("2023-07-19T10:59:31.747Z"),
-    updatedAt: ISODate("2023-07-19T10:59:31.747Z"),
-    __v: NumberInt("0")
-} ]);
-db.getCollection("categories").insert([ {
-    _id: ObjectId("64b7c296c83a9c7dbe895354"),
-    title: "sahar",
-    name: "zibaa",
-    createdAt: ISODate("2023-07-19T11:01:42.095Z"),
-    updatedAt: ISODate("2023-07-19T11:01:42.095Z"),
-    __v: NumberInt("0")
-} ]);
-db.getCollection("categories").insert([ {
     _id: ObjectId("64b8ea3617f2b078046837b0"),
     title: "frontend",
     name: "frontend",
     createdAt: ISODate("2023-07-20T08:03:02.591Z"),
     updatedAt: ISODate("2023-07-20T08:03:02.591Z"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("64bba990fba50075ba8931f5"),
+    title: "گیت",
+    name: "github",
+    createdAt: ISODate("2023-07-22T10:04:00.039Z"),
+    updatedAt: ISODate("2023-07-22T10:04:00.039Z"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("64bcde18a6388af8e5571de2"),
+    title: "مهارت های نرم ",
+    name: "software",
+    createdAt: ISODate("2023-07-23T08:00:24.326Z"),
+    updatedAt: ISODate("2023-07-23T08:00:24.326Z"),
     __v: NumberInt("0")
 } ]);
 
@@ -450,7 +478,7 @@ db.getCollection("contacts").insert([ {
     phone: "09921558293",
     body: "لطفا شرایط همکاری را با بنده در میان بگذارید، با تشکر",
     createdAt: ISODate("2022-10-31T03:52:55.313Z"),
-    updatedAt: ISODate("2022-12-31T08:30:11.782Z"),
+    updatedAt: ISODate("2023-07-23T10:04:28.032Z"),
     __v: NumberInt("0"),
     answer: NumberInt("1")
 } ]);
@@ -509,17 +537,6 @@ db.getCollection("contacts").insert([ {
     updatedAt: ISODate("2023-07-13T12:59:01.593Z"),
     __v: NumberInt("0")
 } ]);
-db.getCollection("contacts").insert([ {
-    _id: ObjectId("64aff5435b4f19a68c09c3b5"),
-    name: "ali",
-    email: "ali@ali.com",
-    phone: "09123456789",
-    answer: NumberInt("0"),
-    body: "سلام من علی هستم سلام من علی هستم سلام من علی هستم سلام من علی هستم ",
-    createdAt: ISODate("2023-07-13T12:59:47.941Z"),
-    updatedAt: ISODate("2023-07-13T12:59:47.941Z"),
-    __v: NumberInt("0")
-} ]);
 
 // ----------------------------
 // Collection structure for courses
@@ -534,7 +551,7 @@ db.getCollection("courses").insert([ {
     _id: ObjectId("6345cda6474f74e04218f6f7"),
     name: "دوره جامع Nodejs برای‌بازار کار",
     description: "توضیحات تستی برای دوره ری‌اکت سبزلرن",
-    cover: "http://localhost:4000/courses/covers/4.png",
+    cover: "nodeJs.jpg",
     shortName: "node-expert",
     categoryID: ObjectId("6345cc0a32c10de974957635"),
     creator: ObjectId("634e6bea1d5142b91afa9bb7"),
@@ -551,7 +568,7 @@ db.getCollection("courses").insert([ {
     _id: ObjectId("6345cfc7586b68648f7f2430"),
     name: "دوره NPM برای برنامه نویسان جاوا اسکریپت",
     description: "توضیحات تست برای دوره NPM سبزلرن",
-    cover: "http://localhost:4000/courses/covers/youtuber.png",
+    cover: "npm.png",
     shortName: "npm",
     categoryID: ObjectId("6345cbd132c10de974957632"),
     creator: ObjectId("634e6bea1d5142b91afa9bb7"),
@@ -568,7 +585,7 @@ db.getCollection("courses").insert([ {
     _id: ObjectId("635305a1678235ce17e263cc"),
     name: "دوره آموزش Vuejs",
     description: "توضیحات تستی برای دوره  ویو جی اس",
-    cover: "http://localhost:4000/courses/covers/python.png",
+    cover: "vuejs.png",
     support: "گروه تلگرامی",
     shortName: "vuejs",
     price: NumberInt("0"),
@@ -585,7 +602,7 @@ db.getCollection("courses").insert([ {
     _id: ObjectId("635d494ed4d9250c10a1dadc"),
     name: "دوره پروژه محور بوت استرپ",
     description: "توضیحات تستی برای دوره BootStrap",
-    cover: "http://localhost:4000/courses/covers/bootstrap.png",
+    cover: "bootstrap.png",
     support: "گروه تلگرامی",
     shortName: "bootstrap",
     price: NumberInt("0"),
@@ -602,7 +619,7 @@ db.getCollection("courses").insert([ {
     _id: ObjectId("635f05d6fd9e8fcba0d2c909"),
     name: "آموزش 20 کتابخانه جاوا اسکریپت",
     description: "توضیحات تستی برای دوره آموزش 20 کتابخانه جاوا اسکریپت",
-    cover: "http://localhost:4000/courses/covers/js20.png",
+    cover: "js20.png",
     support: "گروه تلگرامی",
     shortName: "js-expert",
     price: NumberInt("300000"),
@@ -619,7 +636,7 @@ db.getCollection("courses").insert([ {
     _id: ObjectId("63ac09b2eac86a8e8a018b89"),
     name: "دوره RegEx برای تمامی برنامه نویسان",
     description: "یادگیری رجکس برای تمام برنامه نویسان ضروری و واجب می‌باشد...",
-    cover: "http://localhost:4000/courses/covers/RegEx.png",
+    cover: "RegEx.png",
     support: "پرسش و پاسخ سبزلرن",
     shortName: "regex-course",
     price: NumberInt("240000"),
@@ -630,6 +647,38 @@ db.getCollection("courses").insert([ {
     creator: ObjectId("634e6b0e1d5142b91afa9bb3"),
     createdAt: ISODate("2022-12-28T09:17:38.99Z"),
     updatedAt: ISODate("2023-01-03T09:00:50.434Z"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("courses").insert([ {
+    _id: ObjectId("64bcde7da6388af8e5571ded"),
+    name: "دوره فریلنسر",
+    description: "دوره فریلنسر به شما یاد میده چ",
+    cover: "0cb3043a3086c81f4de76dbc390f2912ca5d2ce73a39102847bb612c4a65e707.png",
+    shortName: "freelancer",
+    price: NumberInt("850000"),
+    isComplete: NumberInt("0"),
+    status: "start",
+    discount: NumberInt("0"),
+    categoryID: ObjectId("64bcde18a6388af8e5571de2"),
+    creator: ObjectId("64b53b5b2fe86bc45c31f826"),
+    createdAt: ISODate("2023-07-23T08:02:05.414Z"),
+    updatedAt: ISODate("2023-07-23T08:02:05.414Z"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("courses").insert([ {
+    _id: ObjectId("64bce037a6388af8e5571e1b"),
+    name: "دوره اموزش axios",
+    description: "دوره اموزش axios یک دوره فوق ا",
+    cover: "0cc05aef138f8872edbc933272b6a021d5e62dd9c0fc09c570855e44b5953751.png",
+    shortName: "axios",
+    price: NumberInt("750000"),
+    isComplete: NumberInt("0"),
+    status: "start",
+    discount: NumberInt("0"),
+    categoryID: ObjectId("64b8ea3617f2b078046837b0"),
+    creator: ObjectId("64b53b5b2fe86bc45c31f826"),
+    createdAt: ISODate("2023-07-23T08:09:27.341Z"),
+    updatedAt: ISODate("2023-07-23T08:09:27.341Z"),
     __v: NumberInt("0")
 } ]);
 

@@ -82,6 +82,11 @@ export default function Sidebar() {
               <span>دسته‌بندی‌ها</span>
             </Link>
           </li>
+          <li>
+            <Link to="contactadmin">
+              <span>تیکت ها</span>
+            </Link>
+          </li>
           <li
             className={`${activeMenu === "active" ? "active-menu" : ""}`}
             onClick={activeMenuHandler}

@@ -14,50 +14,63 @@ import "./Contact.css";
 import { useForm } from "../../hooks/useForm";
 import Button from "../../Components/Form/Button";
 import swal from "sweetalert";
+import {  useNavigate } from "react-router-dom";
 
 export default function Contact() {
-  const [formState, onInputHandler] = useForm(
-    {
-      name: {
-        value: "",
-        isValid: false,
-      },
-      email: {
-        value: "",
-        isValid: false,
-      },
-      phone: {
-        value: "",
-        isValid: false,
-      },
-      body: {
-        value: "",
-        isValid: false,
-      },
-    },
-    false
-  );
+  const navigate = useNavigate();
 
-  const addNewContact = (event) => {
-    event.preventDefault()
-    console.log('ارسال شد')
-    const newContactInfo = {
-      name:formState.Inputs?.name.value,
-       email:formState.Inputs?.email.value,
-       phone:formState.Inputs?.phone.value,
-       body:formState.Inputs?.body.value,
-    }
-    fetch('http://localhost:4000/v1/contact'  ,{
-        method:'POST',
-        Headers:{
-            'Content-Type' : 'application/json'
+    const [formState, onInputHandler] = useForm(
+      {
+        name: {
+          value: "",
+          isValid: false,
         },
-        body:JSON.stringify(newContactInfo),
-      }).then(res=>res.json())
-      .then(result=>console.log('post contct',result))
-    }      
+        email: {
+          value: "",
+          isValid: false,
+        },
+        phone: {
+          value: "",
+          isValid: false,
+        },
+        body: {
+          value: "",
+          isValid: false,
+        },
+      },
+      false
+    );
 
+    const addNewContact = (event) => {
 
+      event.preventDefault();
+      const localStorageData = JSON.parse(localStorage.getItem("user"));
+      const newContactInfo = {
+        name: formState.inputs.name.value,
+        email: formState.inputs.email.value,
+        phone: formState.inputs.phone.value,
+        body: formState.inputs.body.value,
+      };
+      console.log('newcontact',newContactInfo);
+      fetch("http://localhost:4000/v1/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorageData.token}`,
+        },
+        body: JSON.stringify(newContactInfo),
+      }).then((res) => {
+        if (res.ok) {
+          swal({
+            title: "پیغام شما با موفقیت به مدیر سایت ارسال شد",
+            icon: "success",
+            buttons: "اوکی",
+          }).then((value) => {
+            navigate("/");
+          });
+        }
+      });
+    };
 
   return (
     <>
@@ -71,7 +84,7 @@ export default function Contact() {
             نظر یا انتقادتو بنویس برامون :)
           </span>
           <form action="#" className="login-form">
-            <div className="login-form__username login-form__parent">
+          <div className="login-form__username login-form__parent">
               <Input
                 onInputHandler={onInputHandler}
                 element="input"
@@ -79,7 +92,11 @@ export default function Contact() {
                 className="login-form__username-input"
                 type="text"
                 placeholder="نام و نام خانوادگی"
-                validations={[requiredValidator(), minValidator(6), maxValidator(20)]}
+                validations={[
+                  requiredValidator(),
+                  minValidator(6),
+                  maxValidator(20),
+                ]}
               />
               <i className="login-form__username-icon fa fa-user"></i>
             </div>
@@ -91,7 +108,12 @@ export default function Contact() {
                 className="login-form__password-input"
                 type="text"
                 placeholder="آدرس ایمیل"
-                validations={[requiredValidator(), minValidator(8), maxValidator(40), emailValidator()]}
+                validations={[
+                  requiredValidator(),
+                  minValidator(8),
+                  maxValidator(40),
+                  emailValidator(),
+                ]}
               />
               <i className="login-form__password-icon fa fa-envelope"></i>
             </div>
