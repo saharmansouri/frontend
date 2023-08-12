@@ -4,7 +4,7 @@ import swal from "sweetalert";
 import NewUser from "./NewUser";
 export default function Users() {
   const [users, setUsers] = useState([]);
-
+console.log('users', users)
   useEffect(() => {
     getAllUser();
     // apiRequests(`users`).then(data=>setUsers(data))
@@ -12,16 +12,16 @@ export default function Users() {
 
   function getAllUser() {
     const localStorageData = JSON.parse(localStorage.getItem("user"));
-    fetch(`http://localhost:4000/v1/users`, {
-      headers: {
-        Authorization: `Bearer ${localStorageData.token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((allUsers) => {
-        setUsers(allUsers);
-      });
-  }
+      fetch(`http://localhost:4000/v1/users`, {
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((allUsers) => {
+          setUsers(allUsers);
+        });
+    }
 
   const removeUser = (userId) => {
     const localStorageData = JSON.parse(localStorage.getItem("user"));

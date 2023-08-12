@@ -8,6 +8,7 @@ import "./ArticleInfo.css";
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea";
 import apiRequests from "../../Servicse/Axios/configs";
 import { useParams } from "react-router-dom";
+import domPurify from 'dompurify'
 
 export default function ArticleInfo() {
   const { articleName } = useParams();
@@ -25,9 +26,9 @@ export default function ArticleInfo() {
         setArticleCategory(articleInfo.categoryID);
         setArticleCreator(articleInfo.creator);
         setArticleCreateDate(articleInfo.createdAt);
+        console.log('articleCreator', articleInfo)
       });
   }, []);
-
   return (
     <>
       <Topbar />
@@ -56,35 +57,35 @@ export default function ArticleInfo() {
               <div className="article">
                 <h1 className="article__title">{articleDetails.title}</h1>
                 <div className="article__header">
-                <div className="article-header__category article-header__item">
-                <i className="far fa-user article-header__icon"></i>
-                <span className="article-header__text">
-                نقش کاربر:
-                  {" "}
-                  {articleCreator.role === "ADMIN" ? "ادمین" : "کاربر عادی"}
-                </span>
-              </div>
                   <div className="article-header__category article-header__item">
                     <i className="far fa-user article-header__icon"></i>
                     <span className="article-header__text">
-                      نویسنده: {articleCreator.name}
+                      نقش کاربر:
+                      {articleCreator?.role === "ADMIN" ? "ادمین" : "کاربر عادی"}
                     </span>
                   </div>
-                
+                  <div className="article-header__category article-header__item">
+                    <i className="far fa-user article-header__icon"></i>
+                    <span className="article-header__text">
+                      نویسنده: {articleCreator?.name}
+                    </span>
+                  </div>
+
                   <div className="article-header__category article-header__item">
                     <i className="far fa-eye article-header__icon"></i>
-                    <span className="article-header__text">
+                    <span  className="article-header__text">
                       {" "}
                       تاریخ انتشار :
+                    {articleDetails?.createdAt?.slice(0,10)}
                     </span>{" "}
-                    {articleCreator.createdAt?.slice(0, 10)}
                   </div>
                   <div className="article-header__category article-header__item">
-                  <i className="far fa-clock article-header__icon"> </i>
-                  <a href="#" className="article-header__text">
-                    تاریخ به روزرسانی: {articleDetails.createdAt?.slice(0, 10)}
-                  </a>
-                </div>
+                    <i className="far fa-clock article-header__icon"> </i>
+                    <span className="article-header__text">
+                      تاریخ به روزرسانی:{"    "}
+                      {articleDetails.updatedAt?.slice(0, 10)}
+                    </span>
+                  </div>
                 </div>
                 <img
                   src="/images/blog/1.jpg"
@@ -163,8 +164,9 @@ export default function ArticleInfo() {
                   alt="Article Image"
                   className="article__seconadary-banner"
                 />
-                <div className="article-section">
-                  <h2 className="article-section__title">
+                <div className="article-section" dangerouslySetInnerHTML={{__html:domPurify.sanitize(articleDetails.body)}}>
+
+                  {/* <h2 className="article-section__title">
                     معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
                   </h2>
                   <p className="paragraph article-section__text">
@@ -182,45 +184,9 @@ export default function ArticleInfo() {
                     src="/images/blog/4.png"
                     alt="article body img"
                     className="article-section__img"
-                  />
+                  /> */}
                 </div>
-                <div className="article-section">
-                  <h2 className="article-section__title">
-                    معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
-                  </h2>
-                  <p className="paragraph article-section__text">
-                    توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین
-                    سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی
-                    هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه
-                    شما باید یا تسلط متوسط و حداقلی به زبان انگلیسی داشته باشید
-                    و یا اینکه با استفاده از گوگل ترنسلیت منابع موجود را ترجمه
-                    کرده و از آن‌ها استفاده کنید. به همین دلیل در انتهای محتوا
-                    به شما خواهیم گفت که راه آسان دیگری برای یادگیری زبان جاوا
-                    اسکریپت وجود دارد که شما بتوانید به واسطه آن به صورت رایگان
-                    و به زبان فارسی این زبان را یاد بگیرید.
-                  </p>
-                </div>
-                <div className="article-section">
-                  <h2 className="article-section__title">
-                    معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
-                  </h2>
-                  <p className="paragraph article-section__text">
-                    توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین
-                    سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی
-                    هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه
-                    شما باید یا تسلط متوسط و حداقلی به زبان انگلیسی داشته باشید
-                    و یا اینکه با استفاده از گوگل ترنسلیت منابع موجود را ترجمه
-                    کرده و از آن‌ها استفاده کنید. به همین دلیل در انتهای محتوا
-                    به شما خواهیم گفت که راه آسان دیگری برای یادگیری زبان جاوا
-                    اسکریپت وجود دارد که شما بتوانید به واسطه آن به صورت رایگان
-                    و به زبان فارسی این زبان را یاد بگیرید.
-                  </p>
-                  <img
-                    src="/images/blog/3.jpg"
-                    alt="article body img"
-                    className="article-section__img"
-                  />
-                </div>
+                
 
                 <div className="article-social-media">
                   <span className="article-social-media__text">
@@ -265,8 +231,7 @@ export default function ArticleInfo() {
                 </div>
               </div>
             </div>
-            <div className="col-4">
-            </div>
+            <div className="col-4"></div>
           </div>
           <CommentsTextArea />
         </div>

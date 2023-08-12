@@ -20,14 +20,15 @@ export default function CourseInfo() {
   const [updatedAt, setUpdatedAt] = useState("");
   const [courseTeacher, setCourseTeacher] = useState({});
   const [courseCategory, setCourseCategory] = useState([]);
-  // useEffect(() => {
-  //   fetch(`http://localhost:4000/v1/courses/${canvas}`, {
-  //     method: 'GET',
-  //   }).then(res => console.log('response',res))
-  // }, [])
-
+  // useEffect(() => {    
+  //   fetch (`http://localhost:4000/v1/courses/${courseName}`)
+  //   .then((res) => res.json())
+  //   .then(allCourses=>{
+  //     setCourseDetails(allCourses)})
+ 
+  //   })
   useEffect(() => {
-    apiRequests(`/courses/${courseName}`)
+    apiRequests(`courses/${courseName}`)
       .then((data) => {
         setComments(data.comments);
         setSessions(data.sessions);
@@ -36,10 +37,10 @@ export default function CourseInfo() {
         setUpdatedAt(data.updatedAt);
         setCourseTeacher(data.creator);
         setCourseCategory(data.categoryID);
-        console.log("fff", data);
+        console.log("dataaaaaaaaaaaaaaaaa", data.com);
       })
       .catch((err) => {
-        if (err.res === 402) {
+        if (err.res === 404) {
           alert("errorrr402");
         }
       });
@@ -71,7 +72,7 @@ export default function CourseInfo() {
           <div className="row">
             <div className="col-6">
               <a href="#" className="course-info__link">
-                {courseCategory.title}
+                {courseCategory?.title}
               </a>
               <h1 className="course-info__title">{courseDetails?.name}</h1>
               <p className="course-info__text">
@@ -128,12 +129,12 @@ export default function CourseInfo() {
                     <CourseDetailBox
                       icon="clock"
                       title=" زمان برگذاری"
-                      text={createdAt.slice(0, 10)}
+                      text={createdAt?.slice(0, 10)}
                     />
                     <CourseDetailBox
                       icon="calendar-alt"
                       title="آخرین بروزرسانی:"
-                      text={updatedAt.slice(0, 10)}
+                      text={updatedAt?.slice(0, 10)}
                     />
                   </div>
                 </div>
@@ -253,12 +254,12 @@ export default function CourseInfo() {
                                 href="#"
                                 className="introduction__accordion-link"
                               >
-                                {session.title}
+                                {session?.title}
                               </a>
                             </div>
                             <div className="introduction__accordion-left">
                               <span className="introduction__accordion-time">
-                                {session.time}
+                                {session?.time}
                               </span>
                             </div>
                           </Accordion.Body>
@@ -282,22 +283,22 @@ export default function CourseInfo() {
                       />
                       <div className="techer-details__header-titles">
                         <a href="#" className="techer-details__header-link">
-                          {courseTeacher.name}
+                          {courseTeacher?.name}
                         </a>
                         <span className="techer-details__header-skill">
-                          {courseTeacher.phone}
+                          {courseTeacher?.phone}
                         </span>
                       </div>
                     </div>
                     <div className="techer-details__header-left">
                       <i className="fas fa-chalkboard-teacher techer-details__header-icon"></i>
                       <span className="techer-details__header-name">
-                        {courseTeacher.role}
+                        {courseTeacher?.role}
                       </span>
                     </div>
                   </div>
                   <p className="techer-details__footer">
-                    {courseTeacher.email}
+                    {courseTeacher?.email}
                   </p>
                 </div>
 

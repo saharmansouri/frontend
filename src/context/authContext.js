@@ -6,6 +6,7 @@ const AuthContext = createContext({
   userInfos: null,
   login: () => {},
   logout: () => {},
+  indexInfo:{}
 });
 
 export default AuthContext;

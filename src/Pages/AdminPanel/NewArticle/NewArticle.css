@@ -1,0 +1,38 @@
+.new-form__btn {
+    width: 100% !important;
+    border: none;
+    border-radius: 3px;
+    padding: 1.2rem 0;
+    margin-top: 0.8rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #2bce56 !important;
+    justify-content: space-around;
+  }
+  .submit-btn input {
+    background-color: #2774f5;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    padding: 5px 20px;
+  }
+ .newbutton{
+    display: flex;
+    justify-content: flex-end;
+ }
+  
+  .new-form__btn-error {
+    background-color: red !important;
+  }
+  
+  .new-form__btn-icon {
+    color: var(--white-color);
+    font-size: 1.8rem;
+    position: absolute;
+    right: 1rem;
+  }
+  .new-form__btn-text {
+    color: var(--white-color);
+    margin: 0 auto;
+  }

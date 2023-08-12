@@ -10,17 +10,27 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(false);
   const [userInfos, setUserInfos] = useState({});
+  const [indexInfo, setIndexInfo] = useState({});
 
-  const login = useCallback((userInfos, token) => {
-    setToken(token);
-    setIsLoggedIn(true);
-    setUserInfos(userInfos);
-    localStorage.setItem("user", JSON.stringify({ token }));
-  }, [isLoggedIn]);
+  const login = useCallback(
+    (userInfos, token) => {
+      setToken(token);
+      setIsLoggedIn(true);
+      setUserInfos(userInfos);
+      localStorage.setItem("user", JSON.stringify({ token }));
+    },
+    [isLoggedIn]
+  );
   const logout = useCallback(() => {
     setToken(null);
     setUserInfos({});
     localStorage.removeItem("user");
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/infos/index`)
+      .then((res) => res.json())
+      .then((indexInfos) => setIndexInfo(indexInfos));
   }, []);
 
   useEffect(() => {
@@ -49,6 +59,7 @@ function App() {
         userInfos,
         login,
         logout,
+        indexInfo,
       }}
     >
       {router}

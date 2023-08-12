@@ -51,6 +51,11 @@ export default function Sidebar() {
               <span>دوره ها</span>
             </Link>
           </li>
+          <li>
+            <Link to="sessions">
+              <span>جلسات دوره ها</span>
+            </Link>
+          </li>
           <li className={`${activeMenu === "active" ? "active-menu" : ""}`}>
             <Link to="menus">
               <span>منو ها</span>

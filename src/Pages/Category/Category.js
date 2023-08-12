@@ -278,7 +278,7 @@ export default function Category() {
                   <Pagination
                     items={orderdCourses}
                     itemsCount={3}
-                    pathname={`/category-info/${categoryName}`}
+                    pathname={`/category-info/${categoryName}/1`}
                     setShownCourses={setShownCourses}
                   />
                 </>

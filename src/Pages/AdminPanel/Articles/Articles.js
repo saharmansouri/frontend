@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import apiRequests from "../../../Servicse/Axios/configs";
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable";
 import swal from "sweetalert";
-import { minValidator } from "../../../Components/Validators/rules";
-import Input from "../../../Components/Form/Input";
 import { useForm } from "../../../hooks/useForm";
 import "./Articles.css";
-import Editor from "../../../Components/Form/Editor";
+import NewArticle from "../NewArticle/NewArticle";
 function Articles() {
   const [allArticle, setAllArticle] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
-  const [articleCategory, setArticleCategory] = useState("-1");
-  const [articleCover, setArticleCover] = useState("-1");
-  const [articleBody, setArticleBody] = useState("");
+
+  const [showModalnewArticle, setshowModalNewArticle] = useState(false);
+
   const [formState, onInputHandler] = useForm(
     {
       cover: {
@@ -48,6 +46,14 @@ function Articles() {
       setAllCategories(categories);
     });
   }, []);
+  const onShow = () => {
+    setshowModalNewArticle(true);
+  };
+
+  const onHide = () => {
+    setshowModalNewArticle(false);
+  };
+  
   function getAllArticles() {
     apiRequests(`articles`).then((data) => {
       console.log("data", data);
@@ -82,71 +88,27 @@ function Articles() {
     });
   };
 
-  // const createNewArticle = (event) => {
-  //   event.preventDefault();
-  //   const localStorageData=JSON.parse(localStorage.getItem('user'))
-  //   let formData = new FormData()
-  //   formData.append("title", formState.inputs.title.value);
-  //   formData.append("shortName", formState.inputs.shortName.value);
-  //   formData.append("description", formState.inputs.description.value);
-  //   formData.append('cover',articleCover)
-  //   formData.append('categoryID',articleCategory)
-  //   formData.append('body',articleBody)
-  //   fetch(`http://localhost:4000/v1/articles`,{
-  //     method:'POST',
-  //    headers:{
-  //     'Autorization':`Bearer ${localStorageData.token}`
-  //    },
-  //    body:formData
-  //   }).then(res=>{
-  //     if(res.ok){
-  //       swal({
-  //         title:'موفق',
-  //         text:'مقاله با موفقیت اضافه شد',
-  //         icon:'success'
-  //       }).then(()=>{
-  //         getAllArticles()
-  //       })
-  //     }
-  //   })
-  // };
-  const createNewArticle = event => {
+  const createArticle =(event)=>{
     event.preventDefault()
-    const localStorageDate = JSON.parse(localStorage.getItem('user'))
-    let formData = new FormData()
-    formData.append('title', formState.inputs.title.value)
-    formData.append('shortName', formState.inputs.shortName.value)
-    formData.append('description', formState.inputs.description.value)
-    formData.append('categoryID', articleCategory)
-    formData.append('cover', articleCover)
-    formData.append('body', articleBody)
+    console.log('new Article')
 
-    fetch(`http://localhost:4000/v1/articles`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorageDate.token}`
-      },
-      body: formData
-    }).then(res => {
-      if(res.ok) {
-        swal({
-          title: 'مقاله جدید با موفقیت ایجاد شد',
-          icon: 'success',
-          buttons: 'اوکی'
-        }).then(() => {
-          getAllArticles()
-        })
-      }
-    })
   }
   return (
     <>
       <div class="container-fluid" id="home-content">
         <div class="container">
           <div class="home-title">
-            <span>افزودن مقاله جدید</span>
+            <span>
+              <NewArticle
+                getAllArticles={getAllArticles}
+                onHide={onHide}
+                onShow={onShow}
+                showModalnewArticle={showModalnewArticle}
+                createArticle={createArticle}
+              />
+            </span>
           </div>
-          <form class="form">
+          {/* <form class="form">
             <div class="col-6">
               <div class="name input">
                 <label class="input-title" style={{ display: "block" }}>
@@ -243,7 +205,7 @@ function Articles() {
                 </div>
               </div>
             </div>
-          </form>
+          </form> */}
         </div>
       </div>
       <DataTable title="مقاله ها">

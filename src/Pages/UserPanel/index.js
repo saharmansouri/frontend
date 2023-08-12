@@ -4,6 +4,7 @@ import Topbar from "../../Components/AdminPanel/Topbar/Topbar";
 import { Outlet } from "react-router-dom";
 
 export default function index() {
+  
   return (
     <>
       <div id="content">

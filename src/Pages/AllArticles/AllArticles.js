@@ -10,7 +10,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 
 export default function AllArticles() {
   const [allArticles, setAllArticles] = useState([]);
-  const [shownCourses, setShownCourses] = useState([]);
+  const [showArticles, setshowArticles] = useState([]);
 
   useEffect(() => {
     apiRequests(`/articles`).then((allArticles) => {
@@ -38,7 +38,7 @@ export default function AllArticles() {
           <div className="courses-content">
             <div className="container">
               <div className="row">
-                {shownCourses.map((article) => (
+                {showArticles.map((article) => (
                   <ArticleBox {...article} />
                 ))}
               </div>
@@ -50,7 +50,7 @@ export default function AllArticles() {
         items={allArticles}
         itemsCount={6}
         pathname="/allArticles"
-        setShownCourses={setShownCourses}
+        setShownCourses={setshowArticles}
       />
       <Footer />
     </>
