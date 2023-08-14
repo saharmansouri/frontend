@@ -36,7 +36,6 @@ export default function Sidebar() {
       <div className="sidebar-menu">
         <ul>
           <li
-            className={`${activeMenu === "active" ? "active-menu" : ""}`}
             onClick={activeMenuHandler}
           >
             <Link to="/p-admin">
@@ -44,7 +43,6 @@ export default function Sidebar() {
             </Link>
           </li>
           <li
-            className={`${activeMenu === "active" ? "active-menu" : ""}`}
             onClick={activeMenuHandler}
           >
             <Link to="allCourses">
@@ -56,23 +54,25 @@ export default function Sidebar() {
               <span>جلسات دوره ها</span>
             </Link>
           </li>
-          <li className={`${activeMenu === "active" ? "active-menu" : ""}`}>
+          <li
+           >
             <Link to="menus">
               <span>منو ها</span>
             </Link>
           </li>
-          <li className={`${activeMenu === "active" ? "active-menu" : ""}`}>
+          <li
+          >
             <Link to="articles">
               <span>مقاله ها</span>
             </Link>
           </li>
-          <li className={`${activeMenu === "active" ? "active-menu" : ""}`}>
+          <li 
+          >
             <Link to="users">
               <span>کاربران</span>
             </Link>
           </li>
           <li
-            className={`${activeMenu === "active" ? "active-menu" : ""}`}
             onClick={activeMenuHandler}
           >
             <Link to="#">
@@ -80,7 +80,6 @@ export default function Sidebar() {
             </Link>
           </li>
           <li
-            className={`${activeMenu === "active" ? "active-menu" : ""}`}
             onClick={activeMenuHandler}
           >
             <Link to="category">
@@ -93,7 +92,6 @@ export default function Sidebar() {
             </Link>
           </li>
           <li
-            className={`${activeMenu === "active" ? "active-menu" : ""}`}
             onClick={activeMenuHandler}
           >
             <Link to="#">
