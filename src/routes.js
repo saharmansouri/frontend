@@ -18,6 +18,8 @@ import AdminCategory from './Pages/AdminPanel/Category/Category'
 import AdminUser from './Pages/UserPanel/index'
 import ContactAdmin from "./Pages/AdminPanel/ContactUs/ContactUs";
 import Sessions from "./Pages/AdminPanel/Sessions/Sessions";
+import PAdminaindex from './Pages/AdminPanel/Main/Main'
+
 const routes = [
   { path: "/", element: <Index /> },
   { path: "/course-info/:courseName", element: <CourseInfo /> },
@@ -34,6 +36,7 @@ const routes = [
     path: "/p-admin/*",
     element: <AdminPanel />,
     children: [
+      { path: "", element: <PAdminaindex /> },
       { path: "users", element: <Users /> },
       { path: "menus", element: <Menus /> },
       { path: "articles", element: <Articles /> },
