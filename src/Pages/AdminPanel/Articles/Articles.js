@@ -18,7 +18,6 @@ function Articles() {
   const [articleCover, setArticleCover] = useState("-1");
   const [articleBody, setArticleBody] = useState("");
 
-
   const [showModalnewArticle, setshowModalNewArticle] = useState(false);
 
   const [formState, onInputHandler] = useForm(
@@ -63,7 +62,7 @@ function Articles() {
   const onHide = () => {
     setshowModalNewArticle(false);
   };
-  
+
   function getAllArticles() {
     apiRequests(`articles`).then((data) => {
       console.log("data", data);
@@ -98,10 +97,6 @@ function Articles() {
     });
   };
 
-
-
-
-
   useEffect(() => {
     getAllArticles();
     apiRequests(`category`).then((data) => setAllCategories(data));
@@ -124,7 +119,7 @@ function Articles() {
     fetch(`http://localhost:4000/v1/articles`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${localStorageDate.token}`,
+        Authorization: `Bearer ${localStorageDate.token}`,
       },
       body: formData,
     }).then((res) => {
@@ -135,126 +130,124 @@ function Articles() {
           buttons: "اوکی",
         }).then(() => {
           getAllArticles();
-          setshowModalNewArticle(false)
+          setshowModalNewArticle(false);
         });
       }
     });
   };
   return (
     <>
-     <div class="container-fluid" id="home-content">
+      <div class="container-fluid" id="home-content">
         <div class="container">
-      <div className="newbutton">
-        <Button className="new-form__btn" type="submit" onClick={onShow}>
-          افزودن مقاله
-        </Button>
-      </div>
-      <div>
-        <Modal show={showModalnewArticle} onHide={onHide} size="lg">
-          <ModalDialog>
-            <ModalHeader>افزودن مقاله جدید</ModalHeader>
-            <Modal.Body>
-              <form class="form">
-                <div class="col-6">
-                  <div class="name input">
-                    <label class="input-title" style={{ display: "block" }}>
-                      عنوان
-                    </label>
-                    <Input
-                      element="input"
-                      type="text"
-                      id="title"
-                      onInputHandler={onInputHandler}
-                      validations={[minValidator(8)]}
-                    />
-                    <span class="error-message text-danger"></span>
-                  </div>
+          <div className="newbutton">
+            <Button className="new-form__btn" type="submit" onClick={onShow}>
+              افزودن مقاله
+            </Button>
+          </div>
+          <div>
+            <Modal show={showModalnewArticle} onHide={onHide} size="lg">
+              <ModalDialog>
+                <ModalHeader>افزودن مقاله جدید</ModalHeader>
+                <Modal.Body>
+                  <form class="form">
+                    <div class="col-6">
+                      <div class="name input">
+                        <label class="input-title">عنوان</label>
+                        <Input
+                          element="input"
+                          type="text"
+                          id="title"
+                          onInputHandler={onInputHandler}
+                          validations={[minValidator(8)]}
+                        />
+                        <span class="error-message text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="name input">
+                        <label class="input-title">لینک</label>
+                        <Input
+                          element="input"
+                          type="text"
+                          id="shortName"
+                          onInputHandler={onInputHandler}
+                          validations={[minValidator(5)]}
+                        />
+                        <span class="error-message text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="name input">
+                        <label class="input-title" style={{ display: "block" }}>
+                          چکیده
+                        </label>
+                        <Input
+                          element="textarea"
+                          type="text"
+                          id="description"
+                          onInputHandler={onInputHandler}
+                          validations={[minValidator(5)]}
+                          className="article-textarea"
+                        />
+                        <span class="error-message text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="name input">
+                        <label class="input-title" style={{ display: "block" }}>
+                          محتوا
+                        </label>
+                        <Editor value={articleBody} setValue={setArticleBody} />
+                        <span class="error-message text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="name input">
+                        <label class="input-title" style={{ display: "block" }}>
+                          کاور
+                        </label>
+                        <input
+                          type="file"
+                          onChange={(event) => {
+                            setArticleCover(event.target.files[0]);
+                          }}
+                        />
+                        <span class="error-message text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="name input">
+                        <label class="input-title" style={{ display: "block" }}>
+                          دسته بندی
+                        </label>
+                        <select
+                          onChange={(event) =>
+                            setArticleCategory(event.target.value)
+                          }
+                        >
+                          <option value="-1">
+                            دسته بندی مقاله را انتخاب کنید،
+                          </option>
+                          {allCategories.map((category) => (
+                            <option value={category._id}>
+                              {category.title}
+                            </option>
+                          ))}
+                        </select>
+                        <span class="error-message text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="bottom-form">
+                        <div class="submit-btn"></div>
+                      </div>
+                    </div>
+                  </form>
+                <div class="submit-btn">
+                  <input type="submit" value="افزودن" onClick={createArticle} />
                 </div>
-                <div class="col-6">
-                  <div class="name input">
-                    <label class="input-title" style={{ display: "block" }}>
-                      لینک
-                    </label>
-                    <Input
-                      element="input"
-                      type="text"
-                      id="shortName"
-                      onInputHandler={onInputHandler}
-                      validations={[minValidator(5)]}
-                    />
-                    <span class="error-message text-danger"></span>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="name input">
-                    <label class="input-title" style={{ display: "block" }}>
-                      چکیده
-                    </label>
-                    <Input
-                      element="textarea"
-                      type="text"
-                      id="description"
-                      onInputHandler={onInputHandler}
-                      validations={[minValidator(5)]}
-                      className="article-textarea"
-                    />
-                    <span class="error-message text-danger"></span>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="name input">
-                    <label class="input-title" style={{ display: "block" }}>
-                      محتوا
-                    </label>
-                    <Editor value={articleBody} setValue={setArticleBody} />
-                    <span class="error-message text-danger"></span>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="name input">
-                    <label class="input-title" style={{ display: "block" }}>
-                      کاور
-                    </label>
-                    <input
-                      type="file"
-                      onChange={(event) => {
-                        setArticleCover(event.target.files[0]);
-                      }}
-                    />
-                    <span class="error-message text-danger"></span>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="name input">
-                    <label class="input-title" style={{ display: "block" }}>
-                      دسته بندی
-                    </label>
-                    <select
-                      onChange={(event) =>
-                        setArticleCategory(event.target.value)
-                      }
-                    >
-                      <option value="-1">
-                        دسته بندی مقاله را انتخاب کنید،
-                      </option>
-                      {allCategories.map((category) => (
-                        <option value={category._id}>{category.title}</option>
-                      ))}
-                    </select>
-                    <span class="error-message text-danger"></span>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="bottom-form">
-                    <div class="submit-btn"></div>
-                  </div>
-                </div>
-              </form>
-            </Modal.Body>
-            <div class="submit-btn ">
-              <input type="submit" value="افزودن" onClick={createArticle} />
-            </div>
-            {/* <button
+                </Modal.Body>
+                {/* <button
               type="submit"
               size="lg"
               value="افزودن"
@@ -263,50 +256,53 @@ function Articles() {
             >
               save
             </button> */}
-          </ModalDialog>
-        </Modal>
-      </div>
-      <DataTable title="مقاله ها">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ردیف</th>
-              <th> عنوان مقاله </th>
-              <th>نام کاربری</th>
-              <th>لینک اختصاصی </th>
-              <th>ویرایش</th>
-              <th>حذف</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allArticle.map((article, index) => (
-              <>
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{article.title}</td>
-                  <td>{article.description}</td>
-                  <td>{article.shortName}</td>
-                  <td>
-                    <button type="button" className="btn btn-primary edit-btn">
-                      ویرایش
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-danger edit-btn"
-                      onClick={() => removeArticle(article._id)}
-                    >
-                      حذف
-                    </button>
-                  </td>
+              </ModalDialog>
+            </Modal>
+          </div>
+          <DataTable title="مقاله ها">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>ردیف</th>
+                  <th> عنوان مقاله </th>
+                  <th>نام کاربری</th>
+                  <th>لینک اختصاصی </th>
+                  <th>ویرایش</th>
+                  <th>حذف</th>
                 </tr>
-              </>
-            ))}
-          </tbody>
-        </table>
-      </DataTable>
-      </div>
+              </thead>
+              <tbody>
+                {allArticle.map((article, index) => (
+                  <>
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{article.title}</td>
+                      <td>{article.description}</td>
+                      <td>{article.shortName}</td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-primary edit-btn"
+                        >
+                          ویرایش
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-danger edit-btn"
+                          onClick={() => removeArticle(article._id)}
+                        >
+                          حذف
+                        </button>
+                      </td>
+                    </tr>
+                  </>
+                ))}
+              </tbody>
+            </table>
+          </DataTable>
+        </div>
       </div>
     </>
   );
